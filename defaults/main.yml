@@ -1,0 +1,11 @@
+---
+
+bucky_enabled: yes                 # Enable the role
+bucky_home: /opt/bucky             # Where to install
+
+bucky_port: 8125                   # Bucky listening port
+bucky_graphite_host: 127.0.0.1     # Hostname or IP of Graphite server
+bucky_graphite_port: 2003          # Line Receiver port of Graphite (Carbon)
+bucky_address: 0.0.0.0             # address to listen on over UDP
+
+bucky_additional_options: {}       # Setup additional options

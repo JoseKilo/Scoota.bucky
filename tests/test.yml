@@ -1,0 +1,8 @@
+---
+
+- name: Test the Bucky role
+  hosts: all
+  remote_user: root
+  sudo: yes
+  roles:
+    - Scoota.bucky

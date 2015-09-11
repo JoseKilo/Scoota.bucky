@@ -1,0 +1,4 @@
+---
+
+- name: "Bucky restart"
+  service: name=bucky state=restarted

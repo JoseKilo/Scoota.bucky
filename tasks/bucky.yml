@@ -1,0 +1,39 @@
+---
+
+- name: Install apt requirements
+  apt: name={{item}}
+       update_cache=yes
+  with_items:
+    - python-virtualenv
+    - python-dev
+
+- name: Prepare Bucky directory
+  file: state=directory path={{bucky_home}}
+
+- name: Install PIP dependencies
+  pip: name={{item}} virtualenv={{bucky_home}}/venv/
+  with_items:
+    - six
+    - pycrypto
+    - watchdog
+
+- name: Install Bucky
+  pip: name=bucky virtualenv={{bucky_home}}/venv/
+
+- name: Configure upstart
+  template: src=upstart.conf.j2 dest=/etc/init/bucky.conf
+  notify:
+  - Bucky restart
+
+- name: Configure Bucky
+  template: src=config.j2 dest={{bucky_home}}/config
+  notify:
+  - Bucky restart
+
+- name: Configure Bucky types.db
+  template: src=types.db.j2 dest={{bucky_home}}/types.db
+  notify:
+  - Bucky restart
+
+- name: Ensure that Bucky is started
+  service: name=bucky state=started enabled=yes

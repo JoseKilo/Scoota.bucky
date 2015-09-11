@@ -1,0 +1,5 @@
+---
+
+- include: bucky.yml
+  when: bucky_enabled
+  tags: [bucky]
