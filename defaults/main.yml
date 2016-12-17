@@ -9,3 +9,5 @@ bucky_graphite_port: 2003          # Line Receiver port of Graphite (Carbon)
 bucky_address: 0.0.0.0             # address to listen on over UDP
 
 bucky_additional_options: {}       # Setup additional options
+
+bucky_service: systemd             # Service manager to use

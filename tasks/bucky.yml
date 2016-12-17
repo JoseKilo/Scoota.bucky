@@ -2,7 +2,6 @@
 
 - name: Install apt requirements
   apt: name={{item}}
-       update_cache=yes
   with_items:
     - python-virtualenv
     - python-dev
@@ -22,6 +21,13 @@
 
 - name: Configure upstart
   template: src=upstart.conf.j2 dest=/etc/init/bucky.conf
+  when: bucky_service == 'upstart'
+  notify:
+  - Bucky restart
+
+- name: Configure SystemD
+  template: src=systemd.j2 dest=/etc/systemd/system/bucky.service owner=root group=root mode=0644
+  when: bucky_service == 'systemd'
   notify:
   - Bucky restart
 
